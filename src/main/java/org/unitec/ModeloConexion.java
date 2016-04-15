@@ -15,7 +15,7 @@ public class ModeloConexion {
     
     public static Connection conectarse(String usuario, String password)throws Exception{
         String url="jdbc:mysql://localhost:3306/mysql";
-      Connection con=  DriverManager.getConnection(url,usuario,password);
+     Connection con=   DriverManager.getConnection(url,usuario,password);
       //Nos autenticamos a mysql
              System.out.println("Si te conectaste");
              return con;

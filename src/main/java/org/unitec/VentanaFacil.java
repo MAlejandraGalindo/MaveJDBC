@@ -5,8 +5,10 @@
  */
 package org.unitec;
 
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
@@ -117,7 +119,19 @@ public class VentanaFacil extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
-            ModeloConexion.conectarse("root", "");
+            
+            ///aremos una insercion con jsbc a la tabla facil
+            //1.- Crear un objeto de tipo conexion
+     
+            Connection con=  ModeloConexion.conectarse("root", "");
+            
+            ///2.- con esa conexion invocar un statemenyt preparado
+        PreparedStatement st=con.prepareStatement("insert into FACIL(nombre,edad) values(?,?)");
+        st.setString(1,textoNombre.getText());    //st donde se deposita el insert por ser un varchar se pone setString
+        st.setInt(2,Integer.parseInt(textoEdad.getText()));
+        st.execute();
+          etiquetaInformacion.setText("Registro insertado");
+         
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
            // Logger.getLogger(VentanaFacil.class.getName()).log(Level.SEVERE, null, ex);
